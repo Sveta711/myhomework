@@ -227,7 +227,7 @@
         if (empty($_POST["name"])) {
          $nameErr = "Name is required";
       } else {
-    $name = test_input($_POST["name"]);
+    $name = cleaninput($_POST["name"]);
   }
   if (empty($_POST["lname"])) {
          $lnameErr = "last name is required";
@@ -297,7 +297,7 @@ function test_input($data) {
   <span class="error">* <?php echo $lnameErr;?></span>
   <br><br>
   Username: <input type="text" name="username">
-  <span class="error">* <?php echo $usernameErr;?></span>
+  <span class="error"> * <?php echo $usernameErr;?></span>
   <br><br>
   
   E-mail: <input type="text" name="email">

@@ -1,0 +1,10 @@
+body{
+    text-align: center;
+    align-items: center;
+ justify-content: center;
+    background-color: rgb(150, 253, 198);
+}
+fieldset{
+    color: black;
+    justify-content: center;
+}
