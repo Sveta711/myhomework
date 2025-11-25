@@ -4,9 +4,9 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <?php $nameErr = $emailErr = $genderErr = $websiteErr = "";
-         $name = $email = $gender = $comment = $website = "";
-
+        <?php $nameErr =$lnameErr=$emailErr =$telErr=$validErr=$dateErr=$usernameErr=$passwordErr= $genderErr = $websiteErr = "";
+         $name = $lname= $email=$password=$username =$tel= $gender =$valid=$date= $comment = $website = "";
+         $error=[];
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($_POST["name"])) {
          $nameErr = "Name is required";
@@ -74,8 +74,8 @@ if (!preg_match("/^[a-zA-Z-' ]*$/",$lname)) {
   } else {
     $dob = test_input($_POST["dob"]);
     $birthdate=new DateTIME($dob);
-    $today=new DateTime('today');
-    $age=$birthdate->diff($today)->y;
+    $today=new DateTime();
+    $age=$today->diff($birthdate)->y;
     if($age<18){
         $doberr="YOU ARE NOT ADULT";
         echo $doberr;
@@ -93,7 +93,7 @@ function test_input($data) {
 
 <h2>PHP Form Validation Example</h2>
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+<form method="post" action="save.php" enctype="multipart/form-data">  
     <fieldset>
   Name: <input type="text" name="name">
   <span class="error">* <?php echo $nameErr;?></span>
@@ -134,24 +134,15 @@ function test_input($data) {
 </form>
 
 <?php
-echo "<h2>Your Input:</h2>";
-echo $name;
-echo "<br>";
-echo $lname;
-echo "<br>";
-echo $email;
-echo "<br>";
-echo $username;
-echo "<br>";
-echo $password;
-echo "<br>";
-echo $valid;
-echo "<br>";
-echo $tel;
-echo "<br>";
-echo $age;
-echo "<br>";
-echo $gender;
+session_start();
+if(isset($_SESSION['errors'])&& !empty($_SESSION['errors'])){
+  foreach($_SESSION['errors'] as $error){
+    echo "<p style='color:red;'>{$error}</p>";}
+}
+elseif(isset($_SESSION['success'])){
+  echo "<p style='color:green;'>{$_SESSION['success']}</p>";
+}
+
  ?>
  </body>
  <html>
